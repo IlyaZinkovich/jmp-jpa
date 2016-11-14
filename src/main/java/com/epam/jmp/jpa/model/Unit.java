@@ -2,7 +2,9 @@ package com.epam.jmp.jpa.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -15,23 +17,23 @@ public class Unit {
     private Long id;
 
     @OneToMany(mappedBy = "unit", cascade = REMOVE)
-    private List<Employee> employees;
+    private Set<Employee> employees;
 
     private String name;
 
     public Unit() {
-        this.employees = new ArrayList<>();
+        this.employees = new HashSet<>();
     }
 
     public Unit(String name) {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 

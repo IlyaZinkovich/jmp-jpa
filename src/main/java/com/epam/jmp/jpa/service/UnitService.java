@@ -1,8 +1,8 @@
-package com.epam.jmp.jpa.repository;
+package com.epam.jmp.jpa.service;
 
 import com.epam.jmp.jpa.model.Unit;
 
-public interface UnitRepository {
+public interface UnitService {
 
     Long create(Unit unit);
 

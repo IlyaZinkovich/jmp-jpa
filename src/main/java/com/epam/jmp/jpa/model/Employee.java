@@ -2,6 +2,7 @@ package com.epam.jmp.jpa.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
@@ -19,7 +20,7 @@ public class Employee {
     private PersonalInfo personalInfo;
 
     @ManyToMany(mappedBy = "employees", cascade = MERGE)
-    private List<Project> projects;
+    private Set<Project> projects;
 
     @ManyToOne(cascade = {PERSIST, MERGE})
     @JoinColumn(name = "UNIT_ID", referencedColumnName = "ID")
@@ -50,11 +51,11 @@ public class Employee {
         this.personalInfo = personalInfo;
     }
 
-    public List<Project> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
 

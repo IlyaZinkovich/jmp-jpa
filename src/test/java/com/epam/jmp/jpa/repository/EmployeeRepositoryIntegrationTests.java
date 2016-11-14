@@ -17,7 +17,9 @@ import javax.persistence.PersistenceContext;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.epam.jmp.jpa.model.EmployeeStatus.BILLABLE;
 import static com.epam.jmp.jpa.model.EmployeeStatus.NON_BILLABLE;
@@ -95,7 +97,7 @@ public class EmployeeRepositoryIntegrationTests {
         firstProject.getEmployees().add(employee);
         Project secondProject = getProjectByIdFromDb(2L);
         secondProject.getEmployees().add(employee);
-        List<Project> projects = asList(firstProject, secondProject);
+        Set<Project> projects = new HashSet<>(asList(firstProject, secondProject));
         employee.setProjects(projects);
         employee.setStatus(status);
 
@@ -106,7 +108,7 @@ public class EmployeeRepositoryIntegrationTests {
         assertEquals(personalInfo, employeeFromDb.getPersonalInfo());
         assertEquals(address, employeeFromDb.getAddress());
         assertEquals(status, employeeFromDb.getStatus());
-        List<Project> employeeProjects = getEmployeeProjectsByIdFromDb(id);
+        Set<Project> employeeProjects = new HashSet<>(getEmployeeProjectsByIdFromDb(id));
         assertEquals(projects, employeeProjects);
     }
 
@@ -196,11 +198,11 @@ public class EmployeeRepositoryIntegrationTests {
     public void testAssignEmployeeToProject() {
         Long employeeId = 1L;
         Employee employee = getEmployeeByIdFromDb(employeeId);
-        List<Project> employeeProjects = getEmployeeProjectsByIdFromDb(employeeId);
+        Set<Project> employeeProjects = new HashSet<>(getEmployeeProjectsByIdFromDb(employeeId));
 
         Long projectId = 1L;
         Project project = getProjectByIdFromDb(projectId);
-        List<Employee> projectEmployees = getEmployeesByProjectIdFromDb(projectId);
+        Set<Employee> projectEmployees = new HashSet<>(getEmployeesByProjectIdFromDb(projectId));
         projectEmployees.add(employee);
         project.setEmployees(projectEmployees);
 

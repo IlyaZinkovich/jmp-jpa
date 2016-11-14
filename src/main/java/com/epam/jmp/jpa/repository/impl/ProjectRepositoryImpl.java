@@ -30,8 +30,8 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
-    public void delete(Long testId) {
-        Project project = entityManager.find(Project.class, testId);
+    public void delete(Long id) {
+        Project project = entityManager.find(Project.class, id);
         if (project != null) {
             entityManager.remove(project);
         }

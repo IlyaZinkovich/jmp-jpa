@@ -11,4 +11,8 @@ public interface EmployeeService {
     void deleteById(Long id);
 
     void update(Employee employee);
+
+    void addToUnit(Long employeeId, Long unitId);
+
+    void assignToProject(Long employeeId, Long projectId);
 }

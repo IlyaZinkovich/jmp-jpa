@@ -25,13 +25,13 @@ public class UnitRepositoryImpl implements UnitRepository {
     }
 
     @Override
-    public Unit findById(Long testId) {
-        return entityManager.find(Unit.class, testId);
+    public Unit findById(Long id) {
+        return entityManager.find(Unit.class, id);
     }
 
     @Override
-    public void deleteById(Long testId) {
-        Unit unit = entityManager.find(Unit.class, testId);
+    public void deleteById(Long id) {
+        Unit unit = entityManager.find(Unit.class, id);
         if (unit != null) {
             entityManager.remove(unit);
         }

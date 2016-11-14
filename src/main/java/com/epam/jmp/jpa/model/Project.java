@@ -2,7 +2,9 @@ package com.epam.jmp.jpa.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
@@ -22,10 +24,10 @@ public class Project {
     @JoinTable(name = "EMPLOYEE_PROJECTS",
             joinColumns = @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID"))
-    private List<Employee> employees;
+    private Set<Employee> employees;
 
     public Project() {
-        this.employees = new ArrayList<>();
+        this.employees = new HashSet<>();
     }
 
     public Long getId() {
@@ -44,11 +46,11 @@ public class Project {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
 
