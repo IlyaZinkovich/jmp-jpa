@@ -1,11 +1,10 @@
 package com.epam.jmp.jpa.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -15,11 +14,17 @@ public class Unit {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "unit", cascade = REMOVE)
     private List<Employee> employees;
 
-    public Unit() {
+    private String name;
 
+    public Unit() {
+        this.employees = new ArrayList<>();
+    }
+
+    public Unit(String name) {
+        this.name = name;
     }
 
     public List<Employee> getEmployees() {
@@ -36,5 +41,28 @@ public class Unit {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Unit unit = (Unit) o;
+
+        return name != null ? name.equals(unit.name) : unit.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
     }
 }

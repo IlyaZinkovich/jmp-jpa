@@ -1,8 +1,8 @@
-package com.epam.jmp.jpa.repository;
+package com.epam.jmp.jpa.service;
 
 import com.epam.jmp.jpa.model.Employee;
 
-public interface EmployeeRepository {
+public interface EmployeeService {
 
     Long create(Employee employee);
 

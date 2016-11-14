@@ -12,26 +12,13 @@ public class PersonalInfo {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
-    private Employee employee;
-
     private String name;
 
     public PersonalInfo() {
-
     }
 
     public PersonalInfo(String name) {
         this.name = name;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public String getName() {
@@ -48,5 +35,20 @@ public class PersonalInfo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PersonalInfo that = (PersonalInfo) o;
+
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
     }
 }

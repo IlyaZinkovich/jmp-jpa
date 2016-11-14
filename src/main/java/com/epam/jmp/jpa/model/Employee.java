@@ -3,6 +3,8 @@ package com.epam.jmp.jpa.model;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -12,13 +14,14 @@ public class Employee {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(cascade = {PERSIST, MERGE})
+    @JoinColumn(name = "PERSONAL_INFO_ID")
     private PersonalInfo personalInfo;
 
-    @ManyToMany(mappedBy = "employees", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "employees", cascade = MERGE)
     private List<Project> projects;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {PERSIST, MERGE})
     @JoinColumn(name = "UNIT_ID", referencedColumnName = "ID")
     private Unit unit;
 
@@ -79,23 +82,3 @@ public class Employee {
         this.status = status;
     }
 }
-
-/*
-Create models: Employee, EmployeeStatus, Address, Personal, Project, Unit
-
-Take into account the following:
-
-EmployeeStatus should be Enum type
-Address should be embedded to Employee object
-Relationship between Employee and EmployeePersonalInfo should be one-to-one
-Relationship between Employee and Project should be many-to-many
-Relationship between Unit and Employee should be one-to-many
-Implement Service API which provides:
-
-Create Employee / Unit / Project
-Find employee / Unit / Project by id
-Delete employee / Unit / Project by id
-Update Employee / Unit / Project by id
-Add Employee to Unit by id’s
-Assign Employee for Project by id’s
- */
